@@ -1,0 +1,15 @@
+Python Backend Developer Intern
+
+We are looking for a motivated software engineering intern
+with strong Python programming skills.
+
+Requirements:
+
+- Strong knowledge of Python
+- Knowledge of SQL
+- Experience with FastAPI or Flask
+- Understanding of PostgreSQL
+- Familiarity with Git and GitHub
+- Basic knowledge of Docker
+- Knowledge of REST APIs
+- Good problem solving skills
