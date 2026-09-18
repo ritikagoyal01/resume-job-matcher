@@ -1,4 +1,9 @@
+import re
+
+
 def extract_skills(text):
+
+    """
     skills = [
         "Python",
         "NumPy",
@@ -13,12 +18,38 @@ def extract_skills(text):
         "Docker",
         "AWS",
     ]
+    """
+
+    skill_aliases = {
+        "Python": ["python"],
+        "NumPy": ["numpy"],
+        "Pandas": ["pandas"],
+        "Matplotlib": ["matplotlib"],
+        "Scikit-learn": ["scikit-learn", "sklearn"],
+        "OpenCV": ["opencv", "cv2"],
+        "SQL": ["sql"],
+        "PostgreSQL": ["postgresql", "postgres"],
+        "Git": ["git"],
+        "GitHub": ["github"],
+        "FastAPI": ["fastapi"],
+        "Flask": ["flask"],
+        "Docker": ["docker"],
+        "AWS": ["aws", "amazon web services"],
+        "JavaScript": ["javascript", "js"],
+        "Machine Learning": ["machine learning", "ml"],
+        "REST API": ["rest api", "rest apis", "restful api"],
+    }
 
     found_skills = []
 
-    for skill in skills:
-        if skill.lower() in text.lower():
-            found_skills.append(skill)
+    text = text.lower()
+
+    for skill , aliases in skill_aliases.items():
+        for alias in aliases:
+            # if alias in text:
+            if re.search(r"\b"+re.escape(alias)+ r"\b",text):
+                found_skills.append(skill)
+                break
 
     return found_skills
 
