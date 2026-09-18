@@ -1,4 +1,6 @@
 from pypdf import PdfReader
+from skill_extractor import extract_skills
+
 
 def extract_text_from_pdf(pdf_path):
     reader = PdfReader(pdf_path)
@@ -20,3 +22,10 @@ if __name__ == "__main__":
 
     print("\n ---EXTRACTED RSEUME TEXT ---\n")
     print(text)
+
+    skills = extract_skills(text)
+
+    print("\n---SKILLS FOUND---\n")
+
+    for skill in skills:
+        print("-",skill)
