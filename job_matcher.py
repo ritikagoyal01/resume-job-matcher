@@ -1,4 +1,5 @@
 from skill_extractor import extract_skills
+from text_similarity import calculate_similarity
 from pypdf import PdfReader
 
 def extract_text_from_pdf(pdf_path):
@@ -88,29 +89,50 @@ if __name__ == "__main__":
     job_skills = extract_skills(job_description)
 
     # compare resume and job
-    matched,missing,score = calculate_match(
+    matched,missing,skill_score = calculate_match(
         resume_skills,
         job_skills
     )
 
-    print("\n--- RESUME SKILLS ---")
+    # text similarity
+    similarity_score = calculate_similarity(
+        resume_text,
+        job_description
+    )
+
+    # final score
+    final_score = (
+        (skill_score*0.7)
+        +
+        (similarity_score*0.3)
+    )
+
+    # print the results
+    print("RESUME JOB MATCHER")
+
+
+    print("\n RESUME SKILLS")
 
     for skill in resume_skills:
         print("✓", skill)
 
-    print("\n---JOB SKILLS ---")
+    print("\n JOB SKILLS ")
 
     for skill in job_skills:
         print("-",skill)
 
-    print("\n--- MATCHED SKILLS ---")
+    print("\n MATCHED SKILLS ")
 
     for skill in matched:
         print("✓", skill)
 
-    print("\n--- MISSING SKILLS ---")
+    print("\n MISSING SKILLS ")
 
     for skill in missing:
         print("✗", skill)
 
-    print(f"\n--- MATCH SCORE: {score:.1f}% ---")
+    print(f"\n Skill Match Score : {skill_score:.1f}% ")
+
+    print(f"Text Similarity Score: {similarity_score:.1f}%")
+
+    print(f"FINAL MATCH SCORE: {final_score:.1f}%")
